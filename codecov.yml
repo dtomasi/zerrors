@@ -1,0 +1,9 @@
+coverage:
+  precision: 2
+  round: up
+  range: "60...100"
+
+ignore:
+  - "argtype_string.go"
+  - "errtype_string.go"
+  - "eventtopic_string.go"

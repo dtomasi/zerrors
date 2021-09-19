@@ -1,0 +1,6 @@
+WrapPtr error:
+    github.com/dtomasi/zerrors_test.functionThatWrapsErrorUsingPtr
+        /Users/dtomasi/projects/src/github.com/dtomasi/zerrors/wrap_test.go:30
+  - initial error:
+    github.com/dtomasi/zerrors.Caller
+        /Users/dtomasi/projects/src/github.com/dtomasi/zerrors/xerrors.go:52

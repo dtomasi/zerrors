@@ -1,0 +1,6 @@
+Wrap error:
+    github.com/dtomasi/zerrors_test.functionThatWrapsError
+        /Users/dtomasi/projects/src/github.com/dtomasi/zerrors/wrap_test.go:19
+  - initial error:
+    github.com/dtomasi/zerrors.Caller
+        /Users/dtomasi/projects/src/github.com/dtomasi/zerrors/xerrors.go:52
