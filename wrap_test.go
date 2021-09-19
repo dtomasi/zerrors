@@ -21,8 +21,28 @@ func functionThatWrapsError() error {
 	return nil
 }
 
+func functionThatWrapsErrorWithFormat() error {
+	err := functionThatReturnsInitialError()
+	if err != nil {
+		return z.Wrapf(functionThatReturnsInitialError(), "Wrapf %s", "error")
+	}
+
+	return nil
+}
+
 func functionThatWrapsErrorUsingPtr() (err error) {
 	defer z.WrapPtr(&err, "WrapPtr error")
+
+	err = functionThatReturnsInitialError()
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func functionThatWrapsErrorUsingPtrWithFormat() (err error) {
+	defer z.WrapPtrf(&err, "WrapPtrf %s", "error")
 
 	err = functionThatReturnsInitialError()
 	if err != nil {
@@ -42,6 +62,18 @@ func TestWrapPtr_Integration(t *testing.T) {
 	err := functionThatWrapsErrorUsingPtr()
 	assert.Error(t, err)
 	assert.Equal(t, "WrapPtr error: initial error", err.Error())
+}
+
+func TestWrapf_Integration(t *testing.T) {
+	err := functionThatWrapsErrorWithFormat()
+	assert.Error(t, err)
+	assert.Equal(t, "Wrapf error: initial error", err.Error())
+}
+
+func TestWrapPtrf_Integration(t *testing.T) {
+	err := functionThatWrapsErrorUsingPtrWithFormat()
+	assert.Error(t, err)
+	assert.Equal(t, "WrapPtrf error: initial error", err.Error())
 }
 
 func TestWrapWithOpts_WithType(t *testing.T) {
