@@ -3,4 +3,6 @@ coverage:
   round: up
   range: "60...100"
 
-ignore: []
+ignore:
+  ## No need to test functions that are just wrapped
+  - xerrors.go
