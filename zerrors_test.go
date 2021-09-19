@@ -23,7 +23,7 @@ func helperAssertErrorIsType(t *testing.T, err error, errType fmt.Stringer) {
 	assert.Equal(t, err.(z.TypeAwareError).Type(), errType)
 
 	// Check if IsType is returning true for type
-	assert.True(t, z.IsType(err, errType))
+	assert.True(t, z.IsType(err.(z.TypeAwareError), errType))
 
 	// Check if IsType from TypeAwareError is returning true for type
 	assert.True(t, err.(z.TypeAwareError).IsType(errType))
@@ -59,7 +59,7 @@ func TestNewWithOptsIsType(t *testing.T) {
 	helperAssertErrorIsType(t, err, MyTestError)
 
 	// Test false positive
-	assert.False(t, z.IsType(err, MyOtherTestError))
+	assert.False(t, z.IsType(err.(z.TypeAwareError), MyOtherTestError))
 	assert.False(t, err.(z.TypeAwareError).IsType(MyOtherTestError))
 
 	// Test a switch case scenario on TypeAwareError

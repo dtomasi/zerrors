@@ -8,22 +8,21 @@ import (
 // IsType Check if a given error is matching given type
 // Example:
 // 		zerrors.IsType(err, MyErrorTypeWithStringerInterface)
-func IsType(err error, errType fmt.Stringer) bool {
-	_, ok := err.(TypeAwareError)
-	if !ok {
-		return false
-	}
-
-	isComparable := reflect.TypeOf(err.(TypeAwareError).Type()).Comparable()
+func IsType(err TypeAwareError, errType fmt.Stringer) bool {
+	isComparable := reflect.TypeOf(err.Type()).Comparable()
 
 	for {
-		if isComparable && err.(TypeAwareError).Type() == errType {
+		if isComparable && err.Type() == errType {
 			return true
 		}
 
-		if err = Unwrap(err); err == nil {
+		shouldConvert := Unwrap(err)
+		if shouldConvert == nil {
 			return false
 		}
+
+		// TODO: Check if this is suitable or has to be checked
+		err = shouldConvert.(TypeAwareError) //nolint:forcetypeassert
 	}
 }
 
