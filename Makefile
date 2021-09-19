@@ -19,6 +19,3 @@ test:
 
 coverage:
 	go test -v -race -cover -covermode=atomic ./...
-
-test-with-update-snapshots:
-	UPDATE_SNAPSHOTS=true go test -v -race ./...
