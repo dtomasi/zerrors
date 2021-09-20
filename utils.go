@@ -1,7 +1,6 @@
 package zerrors
 
 import (
-	"fmt"
 	"os"
 	"strings"
 )
@@ -14,10 +13,7 @@ var DefaultSkipCallers = 0 //nolint:gochecknoglobals
 func getCallerSkip(base int) int {
 	// This is used for provide same stacks while running in `go test`
 	if strings.HasSuffix(os.Args[0], ".test") {
-		newVal := DefaultSkipCallers + base + 1
-		fmt.Printf("[NOTICE]: Test mode detected. Adjusting DefaultSkipCallers to %d\n", newVal) //nolint:forbidigo
-
-		return newVal
+		return DefaultSkipCallers + base + 1
 	}
 
 	return DefaultSkipCallers + base
