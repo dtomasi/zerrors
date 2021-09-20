@@ -53,7 +53,7 @@ func TestNewWithOptsIsType(t *testing.T) {
 		"test", // The message
 		z.WithType(MyTestError),
 	)
-	assert.Equal(t, err.Error(), "test")
+	assert.Equal(t, err.Error(), "[MyTestError]: test")
 
 	// Test type functions
 	helperAssertErrorIsType(t, err, MyTestError)
