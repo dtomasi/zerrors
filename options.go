@@ -11,6 +11,7 @@ type ErrorOpt func(e *zError)
 // WithType allows to pass a type (fmt.Stringer compatible) to the error.
 func WithType(errType fmt.Stringer) ErrorOpt {
 	return func(e *zError) {
+		e.msg = fmt.Sprintf("[%s]: %s", errType, e.msg)
 		e.errType = errType
 	}
 }
